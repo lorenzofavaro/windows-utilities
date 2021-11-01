@@ -44,7 +44,7 @@ def get_wallpapers(index):
                 im = Image.open(dest_name)
                 width, height = im.size
                 im.close()
-                if width != screen_width or height != screen_width:
+                if width != screen_width or height != screen_height:
                     os.remove(dest_name)
                 else:
                     index += 1
@@ -59,5 +59,5 @@ if __name__ == "__main__":
     if images_count > 0:
         print(f"Put {images_count} images in '{dest}'")
     else:
-        print("No images found")
+        print("No new images found")
     input("\nClick any button to exit...")
