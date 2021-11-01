@@ -4,9 +4,9 @@ from shutil import copy
 from PIL import Image
 from screeninfo import get_monitors
 from imagehash import average_hash
-import warnings
+from warnings import filterwarnings
 
-warnings.filterwarnings("ignore", category=UserWarning)
+filterwarnings("ignore", category=UserWarning)
 
 monitor = get_monitors()[0]
 screen_size = monitor.width, monitor.height
@@ -40,11 +40,9 @@ def get_wallpapers(index):
         with Image.open(src_name) as im:
             im_hash = str(average_hash(im))
 
-            if im.size != screen_size or im_hash in present_hashes:
-                continue
-
-            copy(src_name, dest_name)
-            index += 1
+            if im.size == screen_size and im_hash not in present_hashes:
+                copy(src_name, dest_name)
+                index += 1
 
     return index - first_index
 
@@ -52,8 +50,10 @@ def get_wallpapers(index):
 if __name__ == "__main__":
     starting_index = get_starting_index()
     images_count = get_wallpapers(starting_index)
+    
     if images_count > 0:
         print(f"Put {images_count} images in '{dest}'")
     else:
         print("No new images found")
+    
     input("\nClick any button to exit...")
