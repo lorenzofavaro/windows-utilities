@@ -3,13 +3,12 @@ import os
 from shutil import copy
 from PIL import Image
 from screeninfo import get_monitors
-import imagehash
+from imagehash import average_hash
 
 monitor = get_monitors()[0]
 screen_size = monitor.width, monitor.height
 
-src = f"/Users/{getuser()}/AppData/Local/Packages/Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy" \
-      f"/LocalState/Assets"
+src = f"/Users/{getuser()}/AppData/Local/Packages/Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy/LocalState/Assets"
 dest = f"/Users/{getuser()}/Desktop/WindowsWallpapers"
 
 if not os.path.isdir(dest):
@@ -28,14 +27,14 @@ def get_starting_index():
 
 def get_wallpapers(index):
     first_index = index
-    present_hashes = [str(imagehash.average_hash(Image.open(os.path.join(dest, dest_file)))) for dest_file in os.listdir(dest)]
+    present_hashes = [str(average_hash(Image.open(os.path.join(dest, dest_file)))) for dest_file in os.listdir(dest)]
     
     for file_name in os.listdir(src):
         src_name = os.path.join(src, file_name)
         dest_name = os.path.join(dest, f"{index}.jpg")
         
         with Image.open(src_name) as im:
-            im_hash = str(imagehash.average_hash(im))
+            im_hash = str(average_hash(im))
 
             if im.size != screen_size or im_hash in present_hashes:
                 continue
