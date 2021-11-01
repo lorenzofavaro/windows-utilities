@@ -10,10 +10,10 @@ warnings.filterwarnings("ignore", category=UserWarning)
 
 monitor = get_monitors()[0]
 screen_size = monitor.width, monitor.height
-user = getuser()
 
+user = getuser()
 src = f"/Users/{user}/AppData/Local/Packages/Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy/LocalState/Assets"
-dest = f"/Users/{user}/Pictures/Sfondi"
+dest = f"/Users/{user}/Pictures/Wallpapers"
 
 if not os.path.isdir(dest):
     os.mkdir(dest)
