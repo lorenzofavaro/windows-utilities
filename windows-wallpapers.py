@@ -2,6 +2,11 @@ from getpass import getuser
 import os
 from shutil import copy
 from PIL import Image
+from screeninfo import get_monitors
+
+monitor = get_monitors()[0]
+screen_width = monitor.width
+screen_height = monitor.height
 
 src = f"/Users/{getuser()}/AppData/Local/Packages/Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy" \
       f"/LocalState/Assets"
@@ -39,7 +44,7 @@ def get_wallpapers(index):
                 im = Image.open(dest_name)
                 width, height = im.size
                 im.close()
-                if width != 1920 or height != 1080:
+                if width != screen_width or height != screen_width:
                     os.remove(dest_name)
                 else:
                     index += 1
