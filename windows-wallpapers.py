@@ -4,12 +4,16 @@ from shutil import copy
 from PIL import Image
 from screeninfo import get_monitors
 from imagehash import average_hash
+import warnings
+
+warnings.filterwarnings("ignore", category=UserWarning)
 
 monitor = get_monitors()[0]
 screen_size = monitor.width, monitor.height
+user = getuser()
 
-src = f"/Users/{getuser()}/AppData/Local/Packages/Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy/LocalState/Assets"
-dest = f"/Users/{getuser()}/Desktop/WindowsWallpapers"
+src = f"/Users/{user}/AppData/Local/Packages/Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy/LocalState/Assets"
+dest = f"/Users/{user}/Pictures/Sfondi"
 
 if not os.path.isdir(dest):
     os.mkdir(dest)
