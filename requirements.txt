@@ -1,0 +1,7 @@
+ImageHash==4.2.1
+numpy==1.22.3
+Pillow==9.0.1
+PyWavelets==1.3.0
+scipy==1.8.0
+screeninfo==0.8
+six==1.16.0
